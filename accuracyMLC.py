@@ -6,7 +6,7 @@ from matplotlib import pyplot
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import hist
 
-path='/home/med/Desktop/workflow/handsonML/classifier_comparision.csv'
+path='./classifier_comparision.csv'
 
 df=pd.read_csv(path)
 df1=pd.DataFrame(df)
