@@ -1,0 +1,12 @@
+Classifier,Accuracy,Precision,Recall,F1-Score
+Nearest Neighbors,1.000,1.000,1.000,1.000
+Linear SVM,1.000,1.000,1.000,1.000
+RBF SVM,0.963,0.931,1.000,0.964
+Gaussian Process,1.000,1.000,1.000,1.000
+Decision Tree,1.000,1.000,1.000,1.000
+Random Forest,1.000,1.000,1.000,1.000
+Neural Net,1.000,1.000,1.000,1.000
+AdaBoost,1.000,1.000,1.000,1.000
+Naive Bayes,1.000,1.000,1.000,1.000
+QDA,1.000,1.000,1.000,1.000
+SGDClassifier,0.996,0.993,1.000,0.996
