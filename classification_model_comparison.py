@@ -42,7 +42,7 @@ names = [
 "AdaBoost",
 "Naive Bayes", ###
 "QDA", ###
-"SGDClassifier",
+"SGDClassifier"
 ]
 # names = [
 
@@ -50,18 +50,48 @@ names = [
 
 # ]
 
+# classifiers = [
+# KNeighborsClassifier(n_neighbors=5),
+# SVC(kernel="linear", C=0.025),
+# SVC(gamma=2, C=1),
+# GaussianProcessClassifier(),
+# DecisionTreeClassifier(),
+# RandomForestClassifier(),
+# MLPClassifier(random_state=2, max_iter=50),
+# AdaBoostClassifier(),
+# GaussianNB(),
+# QuadraticDiscriminantAnalysis(),
+# SGDClassifier(loss="hinge", penalty="l2", max_iter=100),
+# ]
+
+
+# classifiers = [
+#     KNeighborsClassifier(n_neighbors=5),
+#     SVC(kernel="linear", C=0.025),
+#     SVC(kernel='rbf', gamma=2, C=0.025),
+#     GaussianProcessClassifier(),
+#     DecisionTreeClassifier(),
+#     RandomForestClassifier(),
+#     MLPClassifier(random_state=2, max_iter=50),
+#     AdaBoostClassifier(),
+#     GaussianNB(),
+#     QuadraticDiscriminantAnalysis(),
+#     SGDClassifier(loss="hinge", penalty="l2", max_iter=50)
+# ]
+
+
 classifiers = [
-KNeighborsClassifier(n_neighbors=5),
-SVC(kernel="linear", C=0.025),
-SVC(gamma=2, C=1),
-GaussianProcessClassifier(),
-DecisionTreeClassifier(),
-RandomForestClassifier(),
-MLPClassifier(random_state=2, max_iter=1000),
-AdaBoostClassifier(),
-GaussianNB(),
-QuadraticDiscriminantAnalysis(),
-SGDClassifier(loss="hinge", penalty="l2", max_iter=100),
+    KNeighborsClassifier(n_neighbors=5),
+    SVC(kernel="linear"),
+    SVC(kernel='rbf'),
+    GaussianProcessClassifier(),
+    DecisionTreeClassifier(),
+    RandomForestClassifier(),
+    MLPClassifier(),
+    AdaBoostClassifier(),
+    GaussianNB(),
+    QuadraticDiscriminantAnalysis(),
+    SGDClassifier()
 ]
 
 # classifiers = [
@@ -69,6 +99,7 @@ SGDClassifier(loss="hinge", penalty="l2", max_iter=100),
 # QuadraticDiscriminantAnalysis()
 
 # ]
+pathtest = './test_file.csv'
 path='./output_file.csv'
 #path='/home/med/Desktop/workflow/handsonML/archive_code/Packet_Dataset.csv'
 # path1='/home/med/Desktop/workflow/handsonML/test.csv'
@@ -90,18 +121,26 @@ features = ['Cycles', 'Minstret', 'JMP_STALL', 'IMISS', 'LD', 'ST', 'JUMP', 'BRA
 # features=['Cycles','Minstret','JMP_STALL','IMISS','LD','ST','JUMP','BRANCH','BRANCH_TAKEN','COMP_INSTR','PIP_STALL']
 #df=pd.read_csv(path)
 df=pd.read_csv(path)
-# test=pd.read_csv(path1)
+test=pd.read_csv(pathtest)
 #df=df.drop(['Cycle'],1)
 #X=np.array(df.drop(['Packet_Nbre'],1).astype(np.int32))
+#X=df.drop(['Packet_Nbre'],axis=1)
 X=df.drop(['Packet_Nbre','JMP_STALL','PIP_STALL'],axis=1)
+y=df.Packet_Nbre
+
+X_test=test.drop(['Packet_Nbre','JMP_STALL','PIP_STALL'],axis=1)
+y_test=test.Packet_Nbre
+
+
 print(df.info())
 print(df.head())
 print(df.Packet_Nbre.value_counts())
 
 #y=np.array(df['Packet_Nbre'])
-y=df.Packet_Nbre
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y,test_size=0.2)
+
+X_train, X_test1, y_train, y_test2 = train_test_split(    X, y,test_size=0.05)
+#X_train, y_train = train_test_split(X, y,test_size=0.35)
+
 classhead="Classifier,Accuracy,Precision,Recall,F1-Score\n"
 csv_file1 = open("classifier_comparision.csv", "w")
 csv_file1.write(classhead)
@@ -136,12 +175,12 @@ for name, clf in zip(names, classifiers):
 print(accuracy)
 print(accuracytr)
 
-ax=df.drop(['Packet_Nbre','Cycles'],axis=1).plot()
-#cursor =Cursor(ax, horizOn = True, vertOn=True, color='red', linewidth=1,   useblit=True)
-plt.xticks(fontsize=17.0,fontweight='bold')
-plt.yticks(fontsize=17.0,fontweight='bold')
-plt.title('HPC value per Packet Network', fontsize=24.0 ,fontweight='bold')
-plt.xlabel('Number of Packet Network', fontsize=24.0 ,fontweight='bold')
-plt.ylabel('HPC-Hardware Performance Counter value', fontsize=24.0 ,fontweight='bold')
-plt.legend(fontsize=17.0)
-plt.show()
+# ax=df.drop(['Packet_Nbre','Cycles'],axis=1).plot()
+# #cursor =Cursor(ax, horizOn = True, vertOn=True, color='red', linewidth=1,   useblit=True)
+# plt.xticks(fontsize=17.0,fontweight='bold')
+# plt.yticks(fontsize=17.0,fontweight='bold')
+# plt.title('HPC value per Packet Network', fontsize=24.0 ,fontweight='bold')
+# plt.xlabel('Number of Packet Network', fontsize=24.0 ,fontweight='bold')
+# plt.ylabel('HPC-Hardware Performance Counter value', fontsize=24.0 ,fontweight='bold')
+# plt.legend(fontsize=17.0)
+# plt.show()
